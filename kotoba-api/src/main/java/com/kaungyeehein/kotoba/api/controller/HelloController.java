@@ -1,4 +1,4 @@
-package com.kaungyeehein.kotoba.api;
+package com.kaungyeehein.kotoba.api.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
