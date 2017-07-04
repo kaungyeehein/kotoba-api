@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-	<context:component-scan base-package="com.kaungyeehein.kotoba.api" />
+	<context:component-scan base-package="com.kaungyeehein.ktb.api" />
 
 	<mvc:annotation-driven />
 

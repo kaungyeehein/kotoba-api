@@ -25,27 +25,27 @@
 			password="${mybatis.generator.jdbcPassword}">
 		</jdbcConnection>
 
-		<javaModelGenerator targetPackage="${mybatis.generator.outputDirectory}.domain.${mybatis.generator.moduleName}"
+		<javaModelGenerator targetPackage="${mybatis.generator.outputDirectory}.domain" 
 			targetProject="./src/main/java">
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="${mybatis.generator.outputDirectory}.mapper.${mybatis.generator.moduleName}"
+		<sqlMapGenerator targetPackage="${mybatis.generator.outputDirectory}.mapper" 
 			targetProject="./src/main/resources">
 		</sqlMapGenerator>
 
-		<javaClientGenerator targetPackage="${mybatis.generator.outputDirectory}.mapper.${mybatis.generator.moduleName}"
+		<javaClientGenerator targetPackage="${mybatis.generator.outputDirectory}.mapper" 
 			targetProject="./src/main/java" type="XMLMAPPER">
 		</javaClientGenerator>
 
-		<table tableName="kotoba">
-			<columnRenamingRule searchString="^kotoba_" replaceString="" />
+		<table tableName="ktb_kotoba_jp">
+			<columnRenamingRule searchString="^ktb_jp_" replaceString="" />
 		</table>
-		<table tableName="kotoba_mm">
-			<columnRenamingRule searchString="^kotoba_" replaceString="" />
+		<table tableName="ktb_kotoba_mm">
+			<columnRenamingRule searchString="^ktb_mm_" replaceString="" />
 		</table>
-		<table tableName="kotoba_en">
-			<columnRenamingRule searchString="^kotoba_" replaceString="" />
+		<table tableName="ktb_kotoba_en">
+			<columnRenamingRule searchString="^ktb_en_" replaceString="" />
 		</table>
 		
 	</context>
