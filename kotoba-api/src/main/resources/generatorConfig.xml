@@ -2,7 +2,9 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 
-	<context id="context1">
+	<properties resource="generatorConfig.properties"></properties>
+
+	<context id="context1" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -17,21 +19,28 @@
 			<property name="suppressDate" value="true" />
 		</commentGenerator>
 
-		<jdbcConnection connectionURL="jdbc:mysql://127.0.0.1/kotoba"
-			driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+		<jdbcConnection connectionURL="${mybatis.generator.jdbcURL}"
+			driverClass="${mybatis.generator.jdbcDriver}" 
+			userId="${mybatis.generator.jdbcUserId}" 
+			password="${mybatis.generator.jdbcPassword}">
+		</jdbcConnection>
 
-		<javaModelGenerator targetPackage="com.kaungyeehein.kotoba.api.domain"
-			targetProject="./src/main/java" />
+		<javaModelGenerator targetPackage="${mybatis.generator.outputDirectory}.domain.${mybatis.generator.moduleName}"
+			targetProject="./src/main/java">
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.kaungyeehein.kotoba.api.mapper"
-			targetProject="./src/main/resources" />
+		<sqlMapGenerator targetPackage="${mybatis.generator.outputDirectory}.mapper.${mybatis.generator.moduleName}"
+			targetProject="./src/main/resources">
+		</sqlMapGenerator>
 
-		<javaClientGenerator targetPackage="com.kaungyeehein.kotoba.api.mapper"
-			targetProject="./src/main/java" type="XMLMAPPER" />
+		<javaClientGenerator targetPackage="${mybatis.generator.outputDirectory}.mapper.${mybatis.generator.moduleName}"
+			targetProject="./src/main/java" type="XMLMAPPER">
+		</javaClientGenerator>
 
 		<table tableName="kotoba" />
 		<table tableName="kotoba_mm" />
 		<table tableName="kotoba_en" />
-
+		
 	</context>
 </generatorConfiguration>
