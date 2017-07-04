@@ -38,9 +38,15 @@
 			targetProject="./src/main/java" type="XMLMAPPER">
 		</javaClientGenerator>
 
-		<table tableName="kotoba" />
-		<table tableName="kotoba_mm" />
-		<table tableName="kotoba_en" />
+		<table tableName="kotoba">
+			<columnRenamingRule searchString="^kotoba_" replaceString="" />
+		</table>
+		<table tableName="kotoba_mm">
+			<columnRenamingRule searchString="^kotoba_" replaceString="" />
+		</table>
+		<table tableName="kotoba_en">
+			<columnRenamingRule searchString="^kotoba_" replaceString="" />
+		</table>
 		
 	</context>
 </generatorConfiguration>
