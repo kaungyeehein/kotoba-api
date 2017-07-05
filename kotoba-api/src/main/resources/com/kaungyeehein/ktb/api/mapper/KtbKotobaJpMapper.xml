@@ -18,6 +18,10 @@
     <result column="ktb_jp_update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="ktb_jp_delete_flag" jdbcType="BIT" property="deleteFlag" />
   </resultMap>
+  <resultMap id="KotobaResultMap" type="com.kaungyeehein.ktb.api.domain.KtbKotobaJp" extends="BaseResultMap">
+  	<collection property="mm" resultMap="com.kaungyeehein.ktb.api.mapper.KtbKotobaMmMapper.BaseResultMap"></collection>
+  	<collection property="en" resultMap="com.kaungyeehein.ktb.api.mapper.KtbKotobaEnMapper.BaseResultMap"></collection>
+  </resultMap>
   <sql id="Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
@@ -380,5 +384,14 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+  </select>
+  <select id="selectKotoba" resultMap="KotobaResultMap">
+  	select
+    <include refid="Base_Column_List"></include>,
+    <include refid="com.kaungyeehein.ktb.api.mapper.KtbKotobaMmMapper.Base_Column_List"></include>,
+    <include refid="com.kaungyeehein.ktb.api.mapper.KtbKotobaEnMapper.Base_Column_List"></include>
+    from (ktb_kotoba_jp
+    	left join ktb_kotoba_mm on ktb_kotoba_mm.ktb_mm_id = ktb_kotoba_jp.ktb_jp_id)
+    	left join ktb_kotoba_en on ktb_kotoba_en.ktb_en_id = ktb_kotoba_jp.ktb_jp_id
   </select>
 </mapper>

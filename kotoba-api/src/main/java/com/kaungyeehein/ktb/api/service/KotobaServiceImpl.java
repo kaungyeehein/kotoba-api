@@ -20,19 +20,10 @@ public class KotobaServiceImpl implements KotobaService {
 
 	@Override
 	public List<KtbKotobaJp> getKotobaJp(KtbKotobaJpCriteria jpCriteria) {
-		RowBounds rowBounds = new RowBounds();
-		return jpMapper.selectByExampleWithRowbounds(jpCriteria, rowBounds);
-	}
-
-	/*@Autowired
-	KotobaMapper kotobaMapper;
-	
-	@Override
-	public List<Kotoba> getKotoba(KotobaCriteria criteria) {
-		RowBounds rowBounds = new RowBounds();
-		return kotobaMapper.selectByExampleWithRowbounds(criteria, rowBounds);
+		/*RowBounds rowBounds = new RowBounds();
+		return jpMapper.selectByExampleWithRowbounds(jpCriteria, rowBounds);*/
 		
-		return kotobaMapper.selectKotobaByExample(criteria);
-	}*/
+		return jpMapper.selectKotoba();
+	}
 
 }
