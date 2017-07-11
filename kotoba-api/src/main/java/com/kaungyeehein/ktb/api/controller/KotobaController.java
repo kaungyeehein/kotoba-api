@@ -28,20 +28,25 @@ public class KotobaController {
 	public ResponseEntity<List<KtbKotobaJp>> getKotobaJp(@RequestParam(name = "q", required = false) String q,
 			@RequestParam(name = "sby", required = false) String sby) {
 
-		KtbKotobaJpCriteria jpCriteria = new KtbKotobaJpCriteria();
-		KtbKotobaMmCriteria mmCriteria = new KtbKotobaMmCriteria();
-		KtbKotobaEnCriteria enCriteria = new KtbKotobaEnCriteria();
+		KtbKotobaJpCriteria jpCriteria = null;
+		KtbKotobaMmCriteria mmCriteria = null;
+		KtbKotobaEnCriteria enCriteria = null;
 
 		if (q != null && sby != null) {
 			if (KTBConstant.SBY_KANA.equalsIgnoreCase(sby)) {
-				jpCriteria.createCriteria().andKanaLikeInsensitive(sby + KTBConstant.SBY_PERCENT);
+				jpCriteria = new KtbKotobaJpCriteria();
+				jpCriteria.createCriteria().andKanaLike(q + KTBConstant.SBY_PERCENT);
 			} else if (KTBConstant.SBY_ROMAJI.equalsIgnoreCase(sby)) {
+				jpCriteria = new KtbKotobaJpCriteria();
 				jpCriteria.createCriteria().andRomajiLikeInsensitive(q + KTBConstant.SBY_PERCENT);
 			} else if (KTBConstant.SBY_KANJI.equalsIgnoreCase(sby)) {
-				jpCriteria.createCriteria().andKanjiLikeInsensitive(q + KTBConstant.SBY_PERCENT);
+				jpCriteria = new KtbKotobaJpCriteria();
+				jpCriteria.createCriteria().andKanjiLike(q + KTBConstant.SBY_PERCENT);
 			} else if (KTBConstant.SBY_MM.equalsIgnoreCase(sby)) {
-				mmCriteria.createCriteria().andNameLikeInsensitive(q + KTBConstant.SBY_PERCENT);
+				mmCriteria = new KtbKotobaMmCriteria();
+				mmCriteria.createCriteria().andNameLike(q + KTBConstant.SBY_PERCENT);
 			} else if (KTBConstant.SBY_EN.equalsIgnoreCase(sby)) {
+				enCriteria = new KtbKotobaEnCriteria();
 				enCriteria.createCriteria().andNameLikeInsensitive(q + KTBConstant.SBY_PERCENT);
 			}
 		}
