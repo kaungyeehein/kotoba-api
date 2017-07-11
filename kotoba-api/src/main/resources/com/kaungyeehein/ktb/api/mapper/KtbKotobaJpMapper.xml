@@ -55,6 +55,83 @@
       </foreach>
     </where>
   </sql>
+  <sql id="Kotoba_Where_Clause">
+    <where>
+      <foreach collection="jpCriteria.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach><foreach collection="mmCriteria.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach><foreach collection="enCriteria.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Update_By_Example_Where_Clause">
     <!--
       WARNING - @mbg.generated
@@ -385,7 +462,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectKotoba" resultMap="KotobaResultMap">
+  <select id="selectKotobaByExample" parameterType="com.kaungyeehein.ktb.api.domain.KtbKotobaJpCriteria" resultMap="KotobaResultMap">
   	select
     <include refid="Base_Column_List"></include>,
     <include refid="com.kaungyeehein.ktb.api.mapper.KtbKotobaMmMapper.Base_Column_List"></include>,
@@ -393,5 +470,15 @@
     from (ktb_kotoba_jp
     	left join ktb_kotoba_mm on ktb_kotoba_mm.ktb_mm_id = ktb_kotoba_jp.ktb_jp_id)
     	left join ktb_kotoba_en on ktb_kotoba_en.ktb_en_id = ktb_kotoba_jp.ktb_jp_id
+    <include refid="Kotoba_Where_Clause" />
+    <if test="jpCriteria.orderByClause != null">
+      order by ${jpCriteria.orderByClause}
+    </if>
+    <if test="mmCriteria.orderByClause != null">
+      order by ${mmCriteria.orderByClause}
+    </if>
+    <if test="enCriteria.orderByClause != null">
+      order by ${enCriteria.orderByClause}
+    </if>
   </select>
 </mapper>

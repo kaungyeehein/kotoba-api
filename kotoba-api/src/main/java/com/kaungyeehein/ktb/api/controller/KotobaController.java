@@ -7,10 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kaungyeehein.ktb.api.common.KTBConstant;
+import com.kaungyeehein.ktb.api.domain.KtbKotobaEnCriteria;
 import com.kaungyeehein.ktb.api.domain.KtbKotobaJp;
 import com.kaungyeehein.ktb.api.domain.KtbKotobaJpCriteria;
+import com.kaungyeehein.ktb.api.domain.KtbKotobaMmCriteria;
 import com.kaungyeehein.ktb.api.service.KotobaService;
 
 @RestController
@@ -21,9 +25,28 @@ public class KotobaController {
 	KotobaService kotobaService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity<List<KtbKotobaJp>> getKotobaJp() {
+	public ResponseEntity<List<KtbKotobaJp>> getKotobaJp(@RequestParam(name = "q", required = false) String q,
+			@RequestParam(name = "sby", required = false) String sby) {
+
 		KtbKotobaJpCriteria jpCriteria = new KtbKotobaJpCriteria();
-		List<KtbKotobaJp> kotobaJp = kotobaService.getKotobaJp(jpCriteria); 
+		KtbKotobaMmCriteria mmCriteria = new KtbKotobaMmCriteria();
+		KtbKotobaEnCriteria enCriteria = new KtbKotobaEnCriteria();
+
+		if (q != null && sby != null) {
+			if (KTBConstant.SBY_KANA.equalsIgnoreCase(sby)) {
+				jpCriteria.createCriteria().andKanaLikeInsensitive(sby + KTBConstant.SBY_PERCENT);
+			} else if (KTBConstant.SBY_ROMAJI.equalsIgnoreCase(sby)) {
+				jpCriteria.createCriteria().andRomajiLikeInsensitive(q + KTBConstant.SBY_PERCENT);
+			} else if (KTBConstant.SBY_KANJI.equalsIgnoreCase(sby)) {
+				jpCriteria.createCriteria().andKanjiLikeInsensitive(q + KTBConstant.SBY_PERCENT);
+			} else if (KTBConstant.SBY_MM.equalsIgnoreCase(sby)) {
+				mmCriteria.createCriteria().andNameLikeInsensitive(q + KTBConstant.SBY_PERCENT);
+			} else if (KTBConstant.SBY_EN.equalsIgnoreCase(sby)) {
+				enCriteria.createCriteria().andNameLikeInsensitive(q + KTBConstant.SBY_PERCENT);
+			}
+		}
+
+		List<KtbKotobaJp> kotobaJp = kotobaService.getKotobaJp(jpCriteria, mmCriteria, enCriteria);
 
 		if (kotobaJp.isEmpty()) {
 			return new ResponseEntity<List<KtbKotobaJp>>(HttpStatus.NO_CONTENT);
