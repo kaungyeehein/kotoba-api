@@ -48,10 +48,14 @@ CREATE TABLE `ktb_kotoba_en` (
     
 INSERT INTO `ktb_kotoba_jp` (`ktb_jp_kana`, `ktb_jp_romaji`, `ktb_jp_kanji`, `ktb_jp_level`, `ktb_jp_chapter`, `ktb_jp_type`, `ktb_jp_sample`, `ktb_jp_delete_flag`) VALUES ('くるま', 'kuruma', '車', 'N5', '1', 'n', 'これは車です。', '0');
 INSERT INTO `ktb_kotoba_jp` (`ktb_jp_kana`, `ktb_jp_romaji`, `ktb_jp_kanji`, `ktb_jp_level`, `ktb_jp_chapter`, `ktb_jp_type`, `ktb_jp_sample`, `ktb_jp_delete_flag`) VALUES ('たべる', 'taberu', '食べる', 'N5', '4', 'v2', 'ひるごはんを食べます。', '0');
+INSERT INTO `ktb_kotoba_jp` (`ktb_jp_kana`, `ktb_jp_romaji`, `ktb_jp_kanji`, `ktb_jp_level`, `ktb_jp_chapter`, `ktb_jp_type`, `ktb_jp_sample`, `ktb_jp_delete_flag`) VALUES ('くつ', 'kutsu', '靴', 'N5', '1', 'n', '靴をぬぎます。', '0');
 
 INSERT INTO `ktb_kotoba_en` (`ktb_en_id`, `ktb_en_name`, `ktb_en_sample`, `ktb_en_delete_flag`) VALUES ('1', 'car', 'This is a car.', '0');
 INSERT INTO `ktb_kotoba_en` (`ktb_en_id`, `ktb_en_name`, `ktb_en_sample`, `ktb_en_delete_flag`) VALUES ('1', 'vehicle', 'This is a vehicle.', '0');
 INSERT INTO `ktb_kotoba_en` (`ktb_en_id`, `ktb_en_name`, `ktb_en_sample`, `ktb_en_delete_flag`) VALUES ('2', 'eat', 'I eat lunch.', '0');
+INSERT INTO `ktb_kotoba_en` (`ktb_en_id`, `ktb_en_name`, `ktb_en_sample`, `ktb_en_delete_flag`) VALUES ('3', 'shoes', 'take off a shoes', '0');
+INSERT INTO `ktb_kotoba_en` (`ktb_en_id`, `ktb_en_name`, `ktb_en_sample`, `ktb_en_delete_flag`) VALUES ('3', 'footwear', NULL, '0');
 
 INSERT INTO `ktb_kotoba_mm` (`ktb_mm_id`, `ktb_mm_name`, `ktb_mm_sample`, `ktb_mm_delete_flag`) VALUES ('1', 'ကား', 'သည်ဟာသည် ကား ဖြစ်သည်။', '0');
 INSERT INTO `ktb_kotoba_mm` (`ktb_mm_id`, `ktb_mm_name`, `ktb_mm_sample`, `ktb_mm_delete_flag`) VALUES ('2', 'စားသည်', 'နေ့လည်စာ စားသည်။', '0');
+INSERT INTO `ktb_kotoba_mm` (`ktb_mm_id`, `ktb_mm_name`, `ktb_mm_sample`, `ktb_mm_delete_flag`) VALUES ('3', 'ဖိနပ်', 'ဖိနပ် ချွတ်သည်။', '0');
